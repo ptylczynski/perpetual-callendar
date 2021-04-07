@@ -77,6 +77,11 @@ public class MovingHolidaysActivity extends AppCompatActivity {
         Integer endYear = this.datePicker_end.getYear();
         StringBuilder sb = new StringBuilder();
         for(Integer year = startYear; year < endYear; year++){
+            this.datePicker_start.updateDate(
+                    year,
+                    this.datePicker_start.getMonth(),
+                    this.datePicker_start.getDayOfMonth()
+            );
             sb.append(year.toString()).append("\n");
             sb.append("Popielec: ")
                     .append(Helpers.popielecDate(this.datePicker_start)).append("\n");
@@ -87,11 +92,6 @@ public class MovingHolidaysActivity extends AppCompatActivity {
             sb.append("Początek Adwentu: ")
                     .append(Helpers.adventStartDate(this.datePicker_start).toString()).append("\n");
             sb.append("\n\n");
-            this.datePicker_start.updateDate(
-                    year,
-                    this.datePicker_start.getMonth(),
-                    this.datePicker_start.getDayOfMonth()
-            );
         }
         this.textView_table.setText(sb.toString());
     }

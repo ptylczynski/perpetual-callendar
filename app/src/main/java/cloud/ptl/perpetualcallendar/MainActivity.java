@@ -7,14 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity {
@@ -95,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void callMovingHolidaysActivity(){
         Intent intent = new Intent(this, MovingHolidaysActivity.class);
+        this.addDates(intent);
+        startActivity(intent);
+    }
+
+    private void callShoppingSundaysActivity(){
+        Intent intent = new Intent(this, ShoppingSundaysActivity.class);
+        this.addDates(intent);
+        startActivity(intent);
+    }
+
+    private void addDates(Intent intent){
         intent.putExtra(
                 "start_date",
                 LocalDate.of(
@@ -111,10 +119,5 @@ public class MainActivity extends AppCompatActivity {
                         this.datePicker_end.getDayOfMonth()
                 ).toString()
         );
-        startActivity(intent);
-    }
-
-    private void callShoppingSundaysActivity(){
-
     }
 }

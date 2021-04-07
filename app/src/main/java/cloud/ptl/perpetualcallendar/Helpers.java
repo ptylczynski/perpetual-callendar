@@ -88,7 +88,7 @@ public class Helpers {
         int year = datePicker.getYear();
         LocalDate januaryLastDay = LocalDate.of(year, 1, 31);
         LocalDate aprilLastDay = LocalDate.of(year, 4, 30);
-        LocalDate juneLastDay = LocalDate.of(year, 6, 31);
+        LocalDate juneLastDay = LocalDate.of(year, 6, 30);
         LocalDate augustLastDay = LocalDate.of(year, 8, 31);
         LocalDate xmas = LocalDate.of(year, 12, 25);
         LocalDate easter = Helpers.easterDate(datePicker);
