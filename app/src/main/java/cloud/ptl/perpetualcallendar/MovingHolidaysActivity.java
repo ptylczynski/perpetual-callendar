@@ -17,6 +17,7 @@ public class MovingHolidaysActivity extends AppCompatActivity {
     private DatePicker datePicker_end;
 
     private TextView textView_header;
+    private TextView textView_table;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -28,6 +29,7 @@ public class MovingHolidaysActivity extends AppCompatActivity {
         this.datePicker_end = new DatePicker(this);
 
         this.textView_header = findViewById(R.id.textView_header);
+        this.textView_table = findViewById(R.id.textView_table);
 
         Intent intent = getIntent();
         LocalDate date_start = LocalDate.parse(intent.getStringExtra("start_date"));
@@ -46,6 +48,7 @@ public class MovingHolidaysActivity extends AppCompatActivity {
         );
 
         this.setHeader();
+        this.setTable();
     }
 
     private void setHeader(){
@@ -68,5 +71,28 @@ public class MovingHolidaysActivity extends AppCompatActivity {
             );
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setTable(){
+        Integer startYear = this.datePicker_start.getYear();
+        Integer endYear = this.datePicker_end.getYear();
+        StringBuilder sb = new StringBuilder();
+        for(Integer year = startYear; year < endYear; year++){
+            sb.append(year.toString()).append("\n");
+            sb.append("Popielec: ")
+                    .append(Helpers.popielecDate(this.datePicker_start)).append("\n");
+            sb.append("Wielkanoc: ")
+                    .append(Helpers.easterDate(this.datePicker_start).toString()).append("\n");
+            sb.append("Boże ciało: ")
+                    .append(Helpers.corpusDeiDate(this.datePicker_start).toString()).append("\n");
+            sb.append("Początek Adwentu: ")
+                    .append(Helpers.adventStartDate(this.datePicker_start).toString()).append("\n");
+            sb.append("\n\n");
+            this.datePicker_start.updateDate(
+                    year,
+                    this.datePicker_start.getMonth(),
+                    this.datePicker_start.getDayOfMonth()
+            );
+        }
+        this.textView_table.setText(sb.toString());
+    }
 }

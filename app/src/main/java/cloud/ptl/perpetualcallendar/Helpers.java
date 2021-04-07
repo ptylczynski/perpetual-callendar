@@ -34,21 +34,21 @@ public class Helpers {
     public static LocalDate easterDate(DatePicker datePicker){
         final int year = datePicker.getYear();
         final int a = year % 19;
-        final int b = Integer.parseInt(((Double) Math.ceil(year / 100.0)).toString());
+        final int b = (int) Math.ceil(year / 100.0);
         final int c = year % 100;
-        final int d = Integer.parseInt(((Double) Math.ceil(b / 4.0)).toString());
+        final int d = (int) Math.ceil(b / 4.0);
         final int e = b % 4;
-        final int f = Integer.parseInt(((Double) ((b + 8) / 25.0)).toString());
-        final int g = Integer.parseInt(((Double) ((b - f + 1) / 3.0)).toString());
-        final int h = (19 * a + b - d + 15) % 30;
-        final int i = Integer.parseInt(((Double) (c / 4.0)).toString());
+        final int f = (int) ((b + 8) / 25.0);
+        final int g = (int) ((b - f + 1) / 3.0);
+        final int h = (19 * a + b - d - g + 15) % 30;
+        final int i = (int)  (c / 4.0);
         final int k = c % 4;
         final int l = (32 + 2 * e + 2 * i - h - k) % 7;
-        final int m = Integer.parseInt(((Double) (a + 11.0 * h + 22.0 * l)).toString());
+        final int m = (int)  (Math.ceil(a + 11.0 * h + 22.0 * l) / 451.0);
         final int p = (h + l - 7 * m + 114) % 31;
 
         final int day = p + 1;
-        final int month = Integer.parseInt(((Double) ((h + l - 7.0 * m + 114.0) / 31.0)).toString());
+        final int month = (int) ((h + l - 7.0 * m + 114.0) / 31.0);
 
         return LocalDate.of(
                 year,
