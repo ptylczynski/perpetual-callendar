@@ -4,8 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,6 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,7 +85,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         this.button_check.setOnClickListener(v -> {
-
+            if (this.switch_shoppingSundays.isChecked())
+                this.callShoppingSundaysActivity();
+            else if (this.switch_movingHolidays.isChecked())
+                    this.callMovingHolidaysActivity();
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void callMovingHolidaysActivity(){
+        Intent intent = new Intent(this, MovingHolidaysActivity.class);
+        intent.putExtra(
+                "start_date",
+                LocalDate.of(
+                        this.datePicker_start.getYear(),
+                        this.datePicker_start.getMonth(),
+                        this.datePicker_start.getDayOfMonth()
+                ).toString()
+        );
+        intent.putExtra(
+                "end_date",
+                LocalDate.of(
+                        this.datePicker_end.getYear(),
+                        this.datePicker_end.getMonth(),
+                        this.datePicker_end.getDayOfMonth()
+                ).toString()
+        );
+        startActivity(intent);
+    }
+
+    private void callShoppingSundaysActivity(){
+
     }
 }
